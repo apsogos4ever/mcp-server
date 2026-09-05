@@ -1,6 +1,6 @@
 {
   "name": "mcp-server",
-  "description": "Minimal stateless MCP server on Cloudflare Workers",
+  "description": "Trading 212 read-only MCP server on Cloudflare Workers",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/server": "2.0.0",
+    "agents": "^0.20.1",
     "zod": "^4.5.4"
   },
   "devDependencies": {
