@@ -1,4 +1,5 @@
-import { McpServer, createMcpHandler } from "@modelcontextprotocol/server";
+import { McpServer } from "@modelcontextprotocol/server";
+import { createMcpHandler } from "agents/mcp/server";
 import { z } from "zod";
 
 interface Env {
@@ -29,6 +30,7 @@ function createServer(env: Env) {
 
     if (!response.ok) {
       const body = await response.text();
+
       throw new Error(
         `Trading 212 API error ${response.status}: ${body}`
       );
@@ -105,6 +107,11 @@ function createServer(env: Env) {
 
 export default {
   fetch(request: Request, env: Env, ctx: ExecutionContext) {
-    return createMcpHandler(() => createServer(env))(request, env, ctx);
+    return createMcpHandler(
+      () => createServer(env),
+      {
+        route: "/mcp",
+      }
+    )(request, env, ctx);
   },
 };
